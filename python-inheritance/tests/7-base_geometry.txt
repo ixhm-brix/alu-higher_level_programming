@@ -43,6 +43,36 @@ Traceback (most recent call last):
     ...
 TypeError: name must be an integer
 
+Tuple raises TypeError:
+>>> bg.integer_validator("age", (4,))
+Traceback (most recent call last):
+    ...
+TypeError: age must be an integer
+
+List raises TypeError:
+>>> bg.integer_validator("age", [3])
+Traceback (most recent call last):
+    ...
+TypeError: age must be an integer
+
+Set raises TypeError:
+>>> bg.integer_validator("age", {3, 4})
+Traceback (most recent call last):
+    ...
+TypeError: age must be an integer
+
+Missing both arguments raises TypeError:
+>>> bg.integer_validator()
+Traceback (most recent call last):
+    ...
+TypeError: integer_validator() missing 2 required positional arguments: 'name' and 'value'
+
+Missing value argument raises TypeError:
+>>> bg.integer_validator("age")
+Traceback (most recent call last):
+    ...
+TypeError: integer_validator() missing 1 required positional argument: 'value'
+
 area raises Exception:
 >>> bg.area()
 Traceback (most recent call last):
