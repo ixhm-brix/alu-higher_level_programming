@@ -26,6 +26,24 @@ Import function:
     important.
     <BLANKLINE>
 
+--- Mixed delimiters ---
+    >>> text_indentation("a.b?c:d")
+    a.
+    <BLANKLINE>
+    b?
+    <BLANKLINE>
+    c:
+    <BLANKLINE>
+    d
+
+--- Consecutive special characters ---
+    >>> text_indentation("a..b")
+    a.
+    <BLANKLINE>
+    .
+    <BLANKLINE>
+    b
+
 --- No special characters ---
     >>> text_indentation("Hello World")
     Hello World
@@ -33,11 +51,16 @@ Import function:
 --- Empty string ---
     >>> text_indentation("")
 
---- Leading spaces stripped ---
-    >>> text_indentation("Hi. there")
-    Hi.
+--- Only a special character ---
+    >>> text_indentation(".")
+    .
     <BLANKLINE>
-    there
+
+--- Spaces after delimiter are stripped ---
+    >>> text_indentation("Hello .  World")
+    Hello .
+    <BLANKLINE>
+    World
 
 --- TypeError: not a string ---
     >>> text_indentation(42)
@@ -51,6 +74,11 @@ Import function:
     TypeError: text must be a string
 
     >>> text_indentation(["hello"])
+    Traceback (most recent call last):
+        ...
+    TypeError: text must be a string
+
+    >>> text_indentation(3.14)
     Traceback (most recent call last):
         ...
     TypeError: text must be a string

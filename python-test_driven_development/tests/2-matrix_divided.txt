@@ -20,11 +20,29 @@ Import function:
     >>> matrix_divided([[1, 2], [3, 4]], 1.5)
     [[0.67, 1.33], [2.0, 2.67]]
 
+--- Negative divisor ---
+    >>> matrix_divided([[1, 2], [3, 4]], -1)
+    [[-1.0, -2.0], [-3.0, -4.0]]
+
 --- Original matrix unchanged ---
     >>> m = [[1, 2, 3], [4, 5, 6]]
     >>> _ = matrix_divided(m, 3)
     >>> m
     [[1, 2, 3], [4, 5, 6]]
+
+--- Float overflow: inf elements ---
+    >>> matrix_divided([[float('inf'), 1]], 2)
+    [[inf, 0.5]]
+
+    >>> matrix_divided([[1, 2]], float('inf'))
+    [[0.0, 0.0]]
+
+--- Float NaN elements ---
+    >>> matrix_divided([[float('nan'), 1]], 2)
+    [[nan, 0.5]]
+
+    >>> matrix_divided([[1, 2]], float('nan'))
+    [[nan, nan]]
 
 --- TypeError: matrix not list of lists ---
     >>> matrix_divided("not a matrix", 3)
@@ -42,6 +60,16 @@ Import function:
         ...
     TypeError: matrix must be a matrix (list of lists) of integers/floats
 
+    >>> matrix_divided([[]], 3)
+    Traceback (most recent call last):
+        ...
+    TypeError: matrix must be a matrix (list of lists) of integers/floats
+
+    >>> matrix_divided(None, 3)
+    Traceback (most recent call last):
+        ...
+    TypeError: matrix must be a matrix (list of lists) of integers/floats
+
 --- TypeError: rows unequal size ---
     >>> matrix_divided([[1, 2], [3, 4, 5]], 3)
     Traceback (most recent call last):
@@ -50,6 +78,11 @@ Import function:
 
 --- TypeError: div not a number ---
     >>> matrix_divided([[1, 2], [3, 4]], "abc")
+    Traceback (most recent call last):
+        ...
+    TypeError: div must be a number
+
+    >>> matrix_divided([[1, 2], [3, 4]], None)
     Traceback (most recent call last):
         ...
     TypeError: div must be a number

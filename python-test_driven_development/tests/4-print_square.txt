@@ -17,7 +17,7 @@ Import function:
 
     >>> print_square(0)
 
---- ValueError: negative size ---
+--- ValueError: negative integer ---
     >>> print_square(-1)
     Traceback (most recent call last):
         ...
@@ -39,8 +39,25 @@ Import function:
         ...
     TypeError: size must be an integer
 
+--- TypeError: float overflow (infinity) ---
+    >>> print_square(float('inf'))
+    Traceback (most recent call last):
+        ...
+    TypeError: size must be an integer
+
+--- TypeError: float NaN ---
+    >>> print_square(float('nan'))
+    Traceback (most recent call last):
+        ...
+    TypeError: size must be an integer
+
 --- TypeError: negative float ---
     >>> print_square(-1.5)
+    Traceback (most recent call last):
+        ...
+    TypeError: size must be an integer
+
+    >>> print_square(-2.5)
     Traceback (most recent call last):
         ...
     TypeError: size must be an integer

@@ -30,6 +30,21 @@ Import function:
         ...
     TypeError: first_name must be a string
 
+    >>> say_my_name(1.5, "White")
+    Traceback (most recent call last):
+        ...
+    TypeError: first_name must be a string
+
+    >>> say_my_name(["John"], "White")
+    Traceback (most recent call last):
+        ...
+    TypeError: first_name must be a string
+
+    >>> say_my_name(True, "White")
+    Traceback (most recent call last):
+        ...
+    TypeError: first_name must be a string
+
 --- TypeError: last_name not string ---
     >>> say_my_name("John", 42)
     Traceback (most recent call last):
@@ -37,6 +52,11 @@ Import function:
     TypeError: last_name must be a string
 
     >>> say_my_name("John", None)
+    Traceback (most recent call last):
+        ...
+    TypeError: last_name must be a string
+
+    >>> say_my_name("John", 1.5)
     Traceback (most recent call last):
         ...
     TypeError: last_name must be a string
