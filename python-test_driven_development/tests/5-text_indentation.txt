@@ -1,0 +1,56 @@
+===========================
+ Tests for text_indentation
+===========================
+
+Import function:
+    >>> text_indentation = __import__('5-text_indentation').text_indentation
+
+--- Normal usage with period ---
+    >>> text_indentation("Hello. World.")
+    Hello.
+    <BLANKLINE>
+    World.
+    <BLANKLINE>
+
+--- Question mark ---
+    >>> text_indentation("How are you? Good.")
+    How are you?
+    <BLANKLINE>
+    Good.
+    <BLANKLINE>
+
+--- Colon ---
+    >>> text_indentation("Note: important.")
+    Note:
+    <BLANKLINE>
+    important.
+    <BLANKLINE>
+
+--- No special characters ---
+    >>> text_indentation("Hello World")
+    Hello World
+
+--- Empty string ---
+    >>> text_indentation("")
+
+--- Leading spaces stripped ---
+    >>> text_indentation("Hi. there")
+    Hi.
+    <BLANKLINE>
+    there
+
+--- TypeError: not a string ---
+    >>> text_indentation(42)
+    Traceback (most recent call last):
+        ...
+    TypeError: text must be a string
+
+    >>> text_indentation(None)
+    Traceback (most recent call last):
+        ...
+    TypeError: text must be a string
+
+    >>> text_indentation(["hello"])
+    Traceback (most recent call last):
+        ...
+    TypeError: text must be a string
