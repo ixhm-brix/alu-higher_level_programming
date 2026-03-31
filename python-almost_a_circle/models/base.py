@@ -7,7 +7,7 @@ import os
 
 
 class Base:
-    """Base class to manage id attribute for all future classes in this project."""
+    """Base class to manage id attribute for all future classes."""
 
     __nb_objects = 0
 
