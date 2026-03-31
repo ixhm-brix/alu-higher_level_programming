@@ -284,3 +284,62 @@ class TestSquare_to_dictionary(unittest.TestCase):
 
 if __name__ == "__main__":
     unittest.main()
+
+
+class TestSquare_save_to_file(unittest.TestCase):
+    """Tests for Square.save_to_file class method."""
+
+    def setUp(self):
+        Base._Base__nb_objects = 0
+
+    def tearDown(self):
+        try:
+            import os
+            os.remove("Square.json")
+        except FileNotFoundError:
+            pass
+
+    def test_save_to_file_none(self):
+        """Test Square.save_to_file(None) writes empty list."""
+        Square.save_to_file(None)
+        with open("Square.json", "r") as f:
+            self.assertEqual(f.read(), "[]")
+
+    def test_save_to_file_empty_list(self):
+        """Test Square.save_to_file([]) writes empty list."""
+        Square.save_to_file([])
+        with open("Square.json", "r") as f:
+            self.assertEqual(f.read(), "[]")
+
+    def test_save_to_file_one_square(self):
+        """Test Square.save_to_file with one Square instance."""
+        s = Square(5)
+        Square.save_to_file([s])
+        with open("Square.json", "r") as f:
+            self.assertIn("size", f.read())
+
+    def test_save_to_file_two_squares(self):
+        """Test Square.save_to_file with two Square instances."""
+        s1 = Square(5)
+        s2 = Square(7, 9, 1)
+        Square.save_to_file([s1, s2])
+        with open("Square.json", "r") as f:
+            import json
+            data = json.loads(f.read())
+        self.assertEqual(len(data), 2)
+
+    def test_save_to_file_filename(self):
+        """Test that save_to_file creates Square.json."""
+        import os
+        Square.save_to_file([Square(1)])
+        self.assertTrue(os.path.exists("Square.json"))
+
+    def test_save_to_file_overwrites(self):
+        """Test that save_to_file overwrites existing file."""
+        Square.save_to_file([Square(10)])
+        Square.save_to_file([Square(1)])
+        with open("Square.json", "r") as f:
+            import json
+            data = json.loads(f.read())
+        self.assertEqual(data[0]["size"], 1)
+
